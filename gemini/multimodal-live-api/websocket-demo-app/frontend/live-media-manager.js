@@ -117,6 +117,10 @@ class LiveAudioInputManager {
                 pcm16[i] = inputData[i] * 0x7fff;
             }
             this.pcmData.push(...pcm16);
+
+            if (this.pcmData.length >= 16384) {
+                this.recordChunk();
+            }
         };
 
         source.connect(this.processor);
